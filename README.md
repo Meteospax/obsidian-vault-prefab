@@ -4,9 +4,9 @@
 ![github-forks][3]
 
 [0]: https://img.shields.io/badge/_-obsidian-7C3AED?logo=obsidian
-[1]: https://img.shields.io/github/license/Falcion/obsidian-vault-prefab
-[2]: https://img.shields.io/github/stars/Falcion/obsidian-vault-prefab
-[3]: https://img.shields.io/github/forks/Falcion/obsidian-vault-prefab
+[1]: https://img.shields.io/github/license/Meteospax/obsidian-vault-prefab
+[2]: https://img.shields.io/github/stars/Meteospax/obsidian-vault-prefab
+[3]: https://img.shields.io/github/forks/Meteospax/obsidian-vault-prefab
 
 ### Obsidian's prefab
 
