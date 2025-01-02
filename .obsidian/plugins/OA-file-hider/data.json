@@ -1,6 +1,11 @@
 {
   "hidden": true,
   "hiddenList": [
-    "Tags"
+    "src",
+    "LICENSE.md",
+    "LICENSE",
+    "Spaces",
+    "icons",
+    "icons-meta"
   ]
 }

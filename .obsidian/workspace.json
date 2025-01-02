@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "18f681ac0e2ffdf3",
+        "id": "7ee9b4e3400a7580",
         "type": "tabs",
         "children": [
           {
-            "id": "1f7b9aabdf3cc833",
+            "id": "a941dcb9c20478a9",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -60,7 +60,7 @@
             }
           },
           {
-            "id": "4f7632097c7005db",
+            "id": "223bfe068732229e",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -149,11 +149,14 @@
       "templates:Insert template": false,
       "obsidian-git:Open Git source control": false,
       "dbfolder:Create a new database table": false,
-      "quickadd:QuickAdd": false
+      "quickadd:QuickAdd": false,
+      "omnisearch:Omnisearch": false
     }
   },
-  "active": "1f7b9aabdf3cc833",
+  "active": "a941dcb9c20478a9",
   "lastOpenFiles": [
+    "icons/",
+    "icons",
     "Tags"
   ]
 }

@@ -6,9 +6,16 @@
   "unitade",
   "settings-search",
   "obsidian-plugin-update-tracker",
-  "tag-wrangler",
   "better-word-count",
   "dbfolder",
   "quickadd",
-  "obsidian-outliner"
+  "obsidian-outliner",
+  "obsidian-admonition",
+  "obsidian-advanced-uri",
+  "obsidian-discordrpc",
+  "obsidian-hider",
+  "obsidian-icon-folder",
+  "omnisearch",
+  "quick-latex",
+  "obsidian-reading-time"
 ]

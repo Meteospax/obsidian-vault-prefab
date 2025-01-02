@@ -1,6 +1,6 @@
 {
   "styleLists": true,
-  "debug": true,
+  "debug": false,
   "stickCursor": "bullet-and-checkbox",
   "betterEnter": true,
   "betterTab": true,
@@ -8,5 +8,5 @@
   "listLines": true,
   "listLineAction": "toggle-folding",
   "dnd": true,
-  "previousRelease": null
+  "previousRelease": "4.8.0"
 }
