@@ -29,7 +29,6 @@
     "iconIdentifier": ":",
     "debugMode": false,
     "iconInTitlePosition": "above",
-    "lucideIconPackType": "native",
-    "useInternalPlugins": false
+    "lucideIconPackType": "native"
   }
 }

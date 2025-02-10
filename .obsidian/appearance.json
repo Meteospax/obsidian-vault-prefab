@@ -1,5 +1,18 @@
 {
-  "monospaceFontFamily": "Fira Code",
+  "accentColor": "",
+  "cssTheme": "",
+  "translucency": false,
+  "baseFontSize": 16,
   "textFontFamily": "Merriweather",
-  "nativeMenus": true
+  "baseFontSizeAction": false,
+  "theme": "system",
+  "enabledCssSnippets": [
+    "images",
+    "indents",
+    "tables",
+    "timelines",
+    "justify",
+    "plugins"
+  ],
+  "showViewHeader": true
 }

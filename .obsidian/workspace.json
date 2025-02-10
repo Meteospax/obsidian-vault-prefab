@@ -1,14 +1,14 @@
 {
   "main": {
-    "id": "b3a43b5af0430c09",
+    "id": "21f61d2cd8cd82dd",
     "type": "split",
     "children": [
       {
-        "id": "7ee9b4e3400a7580",
+        "id": "e2072dfa24871113",
         "type": "tabs",
         "children": [
           {
-            "id": "a941dcb9c20478a9",
+            "id": "f084d9b9e8ad4fea",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -23,15 +23,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "b5056a63f6c416f3",
+    "id": "afffdad702c1b9cf",
     "type": "split",
     "children": [
       {
-        "id": "f737381e029512b3",
+        "id": "ed4c809ea9ec5aa9",
         "type": "tabs",
         "children": [
           {
-            "id": "cb0f0c912fe80d30",
+            "id": "202ae50e89771cc9",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -43,7 +43,7 @@
             }
           },
           {
-            "id": "9ffbf9cfeca1f9a8",
+            "id": "f8412c4f44450017",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -60,7 +60,7 @@
             }
           },
           {
-            "id": "223bfe068732229e",
+            "id": "ef61f3138e3d1b36",
             "type": "leaf",
             "state": {
               "type": "mk-path-view",
@@ -77,61 +77,39 @@
     "width": 300
   },
   "right": {
-    "id": "941af8ee924161f5",
+    "id": "8b19ea7626eb86cd",
     "type": "split",
     "children": [
       {
-        "id": "46a0e77f7ecbe3c3",
+        "id": "18f1b46c43100dad",
         "type": "tabs",
         "children": [
           {
-            "id": "768b11a66b7b2b25",
+            "id": "b9ae76ad841dc666",
             "type": "leaf",
             "state": {
-              "type": "outgoing-link",
+              "type": "backlink",
               "state": {
-                "linksCollapsed": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
               },
-              "icon": "links-going-out",
-              "title": "Outgoing links"
+              "icon": "links-coming-in",
+              "title": "Backlinks"
             }
           },
           {
-            "id": "f4c770482754e3b7",
-            "type": "leaf",
-            "state": {
-              "type": "tag",
-              "state": {
-                "sortOrder": "frequency",
-                "useHierarchy": true
-              },
-              "icon": "lucide-tags",
-              "title": "Tags"
-            }
-          },
-          {
-            "id": "fb32117711a6f9ea",
+            "id": "0ec819490383d42e",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {},
               "icon": "lucide-list",
               "title": "Outline"
-            }
-          },
-          {
-            "id": "ac3a02de852d7b40",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "All properties"
             }
           }
         ]
@@ -143,20 +121,18 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "workspaces:Manage workspace layouts": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false,
+      "omnisearch:Omnisearch": false,
       "dbfolder:Create a new database table": false,
-      "quickadd:QuickAdd": false,
-      "omnisearch:Omnisearch": false
+      "timelines-revamped:Insert Timeline Event": false,
+      "timelines-revamped:Insert Timeline Event (Frontmatter)": false
     }
   },
-  "active": "a941dcb9c20478a9",
-  "lastOpenFiles": [
-    "icons/",
-    "icons",
-    "Tags"
-  ]
+  "active": "f084d9b9e8ad4fea",
+  "lastOpenFiles": []
 }

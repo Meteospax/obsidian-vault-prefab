@@ -80,6 +80,7 @@ h6 {
 .table-cell-wrapper,
 tr {
   text-justify: inter-word;
+  text-align: justify;
   hyphens: auto;
   word-spacing: 0px;
 }
