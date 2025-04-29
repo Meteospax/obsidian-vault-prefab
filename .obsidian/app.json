@@ -24,5 +24,7 @@
   ],
   "showIndentGuide": true,
   "showInlineTitle": true,
-  "uriCallbacks": true
+  "uriCallbacks": true,
+  "showLineNumber": false,
+  "promptDelete": false
 }

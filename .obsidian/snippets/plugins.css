@@ -16,3 +16,6 @@
 .inline-title:not(.mk-inline-title) {
   display: none !important;
 }
+.editingToolbarDefaultAesthetic {
+  border-radius: 0px !important;
+}

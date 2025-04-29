@@ -1,7 +1,7 @@
 {
   "markdown_overcharge": false,
-  "extensions": "txt> json> db>>txt>json>yml>html",
-  "is_case_insensitive": true,
+  "extensions": "txt",
+  "is_case_insensitive": false,
   "is_onload": false,
   "is_onload_unsafe": false,
   "forced_extensions": "",
@@ -9,34 +9,50 @@
   "ignore_extensions": "",
   "ignore_masks": "",
   "is_grouped": false,
-  "grouped_extensions": "e",
+  "grouped_extensions": "",
   "mobile_settings": {
-    "enable": false,
-    "extensions": "txt",
-    "stable": true
+    "extensions": "txt"
   },
   "barefiling": true,
   "stable": true,
   "errors": {},
   "debug_mode": false,
   "silence_errors": true,
-  "manifest_version": "3.0.2",
+  "manifest_version": "3.2.4",
   "compatibility_module": true,
+  "safe_mode": true,
   "code_editor_settings": {
     "enabled": true,
-    "use_default_extensions": true,
-    "extensions": "",
+    "use_default_extensions": false,
+    "extensions": "json>yml>dat>html",
     "folding": true,
     "line_numbers": true,
-    "word_wrapping": true,
+    "word_wrapping": false,
     "minimapping": true,
-    "validation_semantic": false,
+    "validation_semantic": true,
     "validation_syntax": true,
-    "theme": "vs-dark",
+    "theme": "auto",
+    "force_vanilla_paste": false,
     "font_size": 14,
     "font_family": "'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace",
     "font_ligatures": true
   },
   "SYS_FONTSIZE_MAX": 32,
-  "SYS_FONTSIZE_MIN": 5
+  "SYS_FONTSIZE_MIN": 5,
+  "status_bar": {
+    "enabled": false,
+    "registered_extensions": {
+      "enabled": false,
+      "include_extensions": true,
+      "include_extensions_grouped": true,
+      "include_code_editor_extensions": false
+    },
+    "registered_views": false,
+    "current_processor": true,
+    "current_display": true,
+    "cursor_position": true
+  },
+  "advanced_silencing_errors": {
+    "signatures": ""
+  }
 }
