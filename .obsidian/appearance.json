@@ -7,12 +7,12 @@
   "baseFontSizeAction": false,
   "theme": "system",
   "enabledCssSnippets": [
+    "timelines",
     "images",
     "indents",
-    "tables",
-    "timelines",
     "justify",
-    "plugins"
+    "plugins",
+    "tables"
   ],
   "showViewHeader": true
 }

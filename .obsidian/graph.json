@@ -1,83 +1,12 @@
 {
-  "collapse-filter": false,
+  "collapse-filter": true,
   "search": "-tag:#hidden  ",
   "showTags": false,
   "showAttachments": false,
   "hideUnresolved": false,
   "showOrphans": true,
   "collapse-color-groups": false,
-  "colorGroups": [
-    {
-      "query": "tag:#finished  ",
-      "color": {
-        "a": 1,
-        "rgb": 6536218
-      }
-    },
-    {
-      "query": "tag:#designed  ",
-      "color": {
-        "a": 1,
-        "rgb": 14725458
-      }
-    },
-    {
-      "query": "tag:#undesigned  ",
-      "color": {
-        "a": 1,
-        "rgb": 9652296
-      }
-    },
-    {
-      "query": "tag:#system",
-      "color": {
-        "a": 1,
-        "rgb": 7299471
-      }
-    },
-    {
-      "query": "tag:#ideologic  ",
-      "color": {
-        "a": 1,
-        "rgb": 5560749
-      }
-    },
-    {
-      "query": "tag:#systematic",
-      "color": {
-        "a": 1,
-        "rgb": 5419488
-      }
-    },
-    {
-      "query": "tag:#dynasty",
-      "color": {
-        "a": 1,
-        "rgb": 5395168
-      }
-    },
-    {
-      "query": "tag:#country",
-      "color": {
-        "a": 1,
-        "rgb": 11621088
-      }
-    },
-    {
-      "query": "tag:#nation",
-      "color": {
-        "a": 1,
-        "rgb": 14701233
-      }
-    },
-    {
-      "query": "tag:#view",
-      "color": {
-        "a": 1,
-        "rgb": 14701138
-      }
-    }
-  ],
+  "colorGroups": [],
   "collapse-display": true,
   "showArrow": true,
   "textFadeMultiplier": -1,
@@ -88,6 +17,6 @@
   "repelStrength": 13.125,
   "linkStrength": 0.838541666666667,
   "linkDistance": 150,
-  "scale": 0.45050804799449645,
+  "scale": 0.07431470626806493,
   "close": false
 }

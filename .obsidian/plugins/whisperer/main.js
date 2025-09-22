@@ -69,72 +69,142 @@ __export(main_exports, {
   default: () => Whisperer
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian2 = require("obsidian");
+var import_obsidian3 = require("obsidian");
 
 // source/settings.ts
+var import_obsidian2 = require("obsidian");
+
+// source/settings/settings_class.ts
 var import_obsidian = require("obsidian");
-var DEFAULT_SETTINGS = {
-  vault_ambience: false,
-  vault_ambience_path: "",
-  ambience_per_files: true,
-  music_volume: 50
-};
-var WhispererSettingsTab = class extends import_obsidian.PluginSettingTab {
-  constructor(app, plugin) {
-    super(app, plugin);
-    __publicField(this, "plugin");
+var SettingsConstructor = class _SettingsConstructor {
+  constructor(_plugin, _containerEl) {
     __publicField(this, "defaults");
-    this.plugin = plugin;
+    __publicField(this, "_SETTING_AMBIENCE");
+    __publicField(this, "_SETTING_VAULT_PATH_TITLE");
+    __publicField(this, "_SETTING_VAULT_PATH_INPUT");
+    __publicField(this, "_SETTING_AMBIENCE_PER_FILE");
+    __publicField(this, "_SETTING_AMBIENCE_PER_FILE_COMMENT");
+    __publicField(this, "_SETTING_MUSICE_VOLUME");
+    __publicField(this, "_SETTING_DEBUG_FRAMES");
+    __publicField(this, "plugin");
+    __publicField(this, "containerEl");
+    this.plugin = _plugin;
+    this.containerEl = _containerEl;
   }
-  display() {
-    const {
-      containerEl
-    } = this;
-    containerEl.empty();
-    new import_obsidian.Setting(containerEl).setName("Vault ambience:").setDesc("If enabled, plugin would try to apply your embed URL as audio for the vault's ambience.").addToggle((toggle) => {
-      toggle.setValue(this.plugin.settings.vault_ambience).onChange((value) => __async(this, null, function* () {
-        const next = __spreadProps(__spreadValues({}, this.plugin.settings), {
-          vault_ambience: value
-        });
-        yield this.plugin.updateSettings(next);
-        this._updateDisplays([vaultAmbiencePath, vaultAmbiencePathInput], [value, value]);
-      }));
-      return toggle;
-    });
-    const vaultAmbiencePath = new import_obsidian.Setting(containerEl).setName("Path/URL to the audio of Vault's ambience (supports YouTube, SoundCloud):").setDesc("Be aware, that some videos on YouTube are blocked to be played as embed, so they may be not working in the Obsidian's Vault.");
-    const vaultAmbiencePathInput = new import_obsidian.TextAreaComponent(containerEl).setPlaceholder("https://www.youtube.com/watch?v=dQw4w9WgXcQ").setValue(this.plugin.settings.vault_ambience_path).onChange((value) => __async(this, null, function* () {
-      const next = __spreadValues({}, this.plugin.settings);
-      next.vault_ambience_path = value;
-      yield this.plugin.updateSettings(next);
-    }));
-    vaultAmbiencePathInput.inputEl.addClass("input-field");
-    this._updateDisplays([vaultAmbiencePath, vaultAmbiencePathInput], [this.plugin.settings.vault_ambience, this.plugin.settings.vault_ambience]);
-    new import_obsidian.Setting(containerEl).setName("Ambience per files:").setDesc("If enabled, plugin would try to apply your embed URL as audio for the files's ambience specifically: meaning one file got one ambience and etc., prioritised over vault's ambience (vault ambience would stop playing).").addToggle((toggle) => {
-      toggle.setValue(this.plugin.settings.ambience_per_files).onChange((value) => __async(this, null, function* () {
-        const next = __spreadProps(__spreadValues({}, this.plugin.settings), {
-          ambience_per_files: value
-        });
-        yield this.plugin.updateSettings(next);
-      }));
-      return toggle;
-    });
-    new import_obsidian.Setting(containerEl).setName("").setDesc('To apply custom ambience to file, insert into the metadata cache of the file (YAML) "music" variable with URL or path to your audio.');
+  get SETTING_AMBIENCE() {
+    if (this._SETTING_AMBIENCE === void 0) {
+      this._SETTING_AMBIENCE = new import_obsidian.Setting(this.containerEl).setName("Vault ambience:").setDesc(
+        "If enabled, plugin would try to apply your embed URL as audio for the vault's ambience."
+      ).addToggle((toggle) => {
+        toggle.setValue(this.plugin.settings.vault_ambience).onChange((value) => __async(this, null, function* () {
+          const next = __spreadProps(__spreadValues({}, this.plugin.settings), {
+            vault_ambience: value
+          });
+          yield this.plugin.updateSettings(next);
+          _SettingsConstructor.updateDisplays(
+            [this.SETTING_VAULT_PATH_TITLE, this.SETTING_VAULT_PATH_INPUT],
+            [value, value]
+          );
+        }));
+        return toggle;
+      });
+    }
+    return this._SETTING_AMBIENCE;
   }
-  _updateDisplays(elements, values) {
-    if (elements.length !== values.length)
+  get SETTING_VAULT_PATH_TITLE() {
+    if (this._SETTING_VAULT_PATH_TITLE === void 0) {
+      this._SETTING_VAULT_PATH_TITLE = new import_obsidian.Setting(this.containerEl).setName("Path/URL to the audio of Vault's ambience (supports YouTube, SoundCloud):").setDesc(
+        "Be aware, that some videos on YouTube are blocked to be played as embed, so they may be not working in the Obsidian's Vault."
+      );
+    }
+    return this._SETTING_VAULT_PATH_TITLE;
+  }
+  get SETTING_VAULT_PATH_INPUT() {
+    if (this._SETTING_VAULT_PATH_INPUT === void 0) {
+      const result = new import_obsidian.TextAreaComponent(this.containerEl).setPlaceholder("https://www.youtube.com/watch?v=dQw4w9WgXcQ").setValue(this.plugin.settings.vault_ambience_path).onChange((value) => __async(this, null, function* () {
+        const next = __spreadValues({}, this.plugin.settings);
+        next.vault_ambience_path = value;
+        yield this.plugin.updateSettings(next);
+      }));
+      result.inputEl.addClass("input-field");
+      this._SETTING_VAULT_PATH_INPUT = result;
+    }
+    return this._SETTING_VAULT_PATH_INPUT;
+  }
+  get SETTING_AMBIENCE_PER_FILE() {
+    if (this._SETTING_AMBIENCE_PER_FILE === void 0) {
+      this._SETTING_AMBIENCE_PER_FILE = new import_obsidian.Setting(this.containerEl).setName("Ambience per files:").setDesc(
+        "If enabled, plugin would try to apply your embed URL as audio for the files's ambience specifically: meaning one file got one ambience and etc., prioritised over vault's ambience (vault ambience would stop playing)."
+      ).addToggle((toggle) => {
+        toggle.setValue(this.plugin.settings.ambience_per_files).onChange((value) => __async(this, null, function* () {
+          const next = __spreadProps(__spreadValues({}, this.plugin.settings), {
+            ambience_per_files: value
+          });
+          yield this.plugin.updateSettings(next);
+        }));
+        return toggle;
+      });
+    }
+    return this._SETTING_AMBIENCE_PER_FILE;
+  }
+  get SETTING_AMBIENCE_PER_FILE_COMMENT() {
+    if (this._SETTING_AMBIENCE_PER_FILE_COMMENT === void 0) {
+      this._SETTING_AMBIENCE_PER_FILE_COMMENT = new import_obsidian.Setting(this.containerEl).setName("").setDesc(
+        'To apply custom ambience to file, insert into the metadata cache of the file (YAML) "music" variable with URL or path to your audio.'
+      );
+    }
+    return this._SETTING_AMBIENCE_PER_FILE_COMMENT;
+  }
+  get SETTING_MUSIC_VOLUME() {
+    if (this._SETTING_MUSICE_VOLUME === void 0) {
+      this._SETTING_MUSICE_VOLUME = new import_obsidian.Setting(this.containerEl).setName("Music volume").setDesc(
+        "Control volume of YouTube/Local audios. Audio from SoundCloud doesn't support this feature."
+      ).addSlider((slider) => {
+        slider.setDynamicTooltip().setLimits(
+          this.plugin.settings.MIN_VOLUME,
+          this.plugin.settings.MAX_VOLUME,
+          this.plugin.settings.VOLUME_STEP
+        ).onChange((value) => __async(this, null, function* () {
+          const next = __spreadProps(__spreadValues({}, this.plugin.settings), {
+            music_volume: value
+          });
+          yield this.plugin.updateVolumeSettings(next);
+        }));
+      });
+    }
+    return this._SETTING_MUSICE_VOLUME;
+  }
+  get SETTING_DEBUG_FRAMES() {
+    if (this._SETTING_DEBUG_FRAMES === void 0) {
+      this._SETTING_DEBUG_FRAMES = new import_obsidian.Setting(this.containerEl).setName("Debug frames:").setDesc(
+        "Allows you to view frames generated by this plugin, meaning you can view mini-players for music/video."
+      ).addToggle((toggle) => {
+        toggle.setValue(this.plugin.settings.debug_frames).onChange((value) => __async(this, null, function* () {
+          const next = __spreadProps(__spreadValues({}, this.plugin.settings), {
+            debug_frames: value
+          });
+          yield this.plugin.updateSettings(next);
+        }));
+      });
+    }
+    return this._SETTING_DEBUG_FRAMES;
+  }
+  static updateDisplays(elements, values) {
+    if (elements.length !== values.length) {
       throw new Error("Elements and their values both are out of range in some other ways.");
+    }
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
-      if (element instanceof import_obsidian.Setting)
-        element.settingEl.style.display = values[i] ? "block" : "none";
-      if (element instanceof import_obsidian.TextAreaComponent)
+      if (element instanceof import_obsidian.Setting) element.settingEl.style.display = values[i] ? "block" : "none";
+      if (element instanceof import_obsidian.TextAreaComponent) {
         element.inputEl.style.display = values[i] ? "block" : "none";
+      }
     }
   }
   _updateState(data, prev, next) {
     if (prev !== next) {
       if (prev) {
-        if (!this.defaults) {
+        if (this.defaults === void 0) {
           this.defaults = {
             color: data.inputEl.style.color,
             borderColor: data.inputEl.style.borderColor,
@@ -144,7 +214,7 @@ var WhispererSettingsTab = class extends import_obsidian.PluginSettingTab {
         data.inputEl.style.color = "red";
         data.inputEl.style.borderColor = "red";
         data.inputEl.style.borderWidth = "4px";
-      } else if (this.defaults) {
+      } else if (this.defaults !== void 0) {
         data.inputEl.style.color = this.defaults.color;
         data.inputEl.style.borderColor = this.defaults.borderColor;
         data.inputEl.style.borderWidth = this.defaults.borderWidth;
@@ -153,33 +223,342 @@ var WhispererSettingsTab = class extends import_obsidian.PluginSettingTab {
   }
 };
 
+// source/settings.ts
+var WhispererSettingsTab = class extends import_obsidian2.PluginSettingTab {
+  constructor(app, plugin) {
+    super(app, plugin);
+    __publicField(this, "plugin");
+    this.plugin = plugin;
+  }
+  display() {
+    const { containerEl } = this;
+    containerEl.empty();
+    const settingsConstructor = new SettingsConstructor(this.plugin, containerEl);
+    const items = [
+      settingsConstructor.SETTING_AMBIENCE,
+      settingsConstructor.SETTING_VAULT_PATH_TITLE,
+      settingsConstructor.SETTING_VAULT_PATH_INPUT,
+      settingsConstructor.SETTING_AMBIENCE_PER_FILE,
+      settingsConstructor.SETTING_AMBIENCE_PER_FILE_COMMENT,
+      settingsConstructor.SETTING_DEBUG_FRAMES
+    ];
+    SettingsConstructor.updateDisplays(
+      [items[1], items[2]],
+      [this.plugin.settings.vault_ambience, this.plugin.settings.vault_ambience]
+    );
+  }
+};
+
+// source/settings/settings.ts
+var DEFAULT_SETTINGS = {
+  vault_ambience: false,
+  vault_ambience_path: "",
+  ambience_per_files: true,
+  music_volume: 50,
+  debug_frames: false,
+  MIN_VOLUME: 0,
+  MAX_VOLUME: 100,
+  VOLUME_STEP: 1
+};
+
+// source/utils/constants.ts
+var YT_HOSTS = ["youtube.com", "youtu.be"];
+var SC_HOSTS = ["soundcloud.com"];
+
+// source/utils/functions.ts
+function isUrl(str) {
+  return /^(https?:\/\/)/.test(str);
+}
+function getEmbedUrl(url) {
+  if (isAllowedHost(url, YT_HOSTS)) {
+    const videoId = isAllowedHost(url, ["youtu.be"]) ? url.split("/").pop() : new URL(url).searchParams.get("v");
+    if (isEmptyString(videoId)) {
+      throw new Error("Could not extract video ID from YouTube URL");
+    }
+    return `https://www.youtube.com/embed/${videoId != null ? videoId : ""}?autoplay=1&start=0`;
+  } else if (new URL(url).host === "soundcloud.com" || new URL(url).host === "www.soundcloud.com") {
+    return `https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&auto_play=true`;
+  } else throw new Error("Unsupported URL type.");
+}
+function extractId(url) {
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|.*v=))([\w-]{11})/);
+  return match != null ? match[1] : "";
+}
+function isAllowedHost(urlStr, allowedHosts) {
+  let hostname;
+  try {
+    hostname = new URL(urlStr).hostname.toLowerCase();
+  } catch (e) {
+    return false;
+  }
+  return allowedHosts.some((allowed) => {
+    const norm = allowed.toLowerCase();
+    return hostname === norm || hostname.endsWith(`.${norm}`);
+  });
+}
+function isEmptyString(str) {
+  return str === null || str === void 0 || str === "";
+}
+
+// source/player/player_per_file.ts
+var PlayerPerFile = class {
+  constructor(_plugin) {
+    __publicField(this, "plugin");
+    this.plugin = _plugin;
+  }
+  handleFileOpen(file) {
+    return __async(this, null, function* () {
+      var _a;
+      if (file == null) return;
+      if (!this.plugin.settings.ambience_per_files) return;
+      const fileCache = this.plugin.app.metadataCache.getFileCache(file);
+      const musicPath = (_a = fileCache == null ? void 0 : fileCache.frontmatter) == null ? void 0 : _a.music;
+      const { activeFile } = this.plugin;
+      if (typeof musicPath === "string" && musicPath !== "") {
+        this.pauseVaultAmbience();
+        if (!isEmptyString(activeFile)) {
+          this.pauseFileAmbience(activeFile != null ? activeFile : "");
+        }
+        this.plugin.activeFile = file.path;
+        this.playFileAmbience(musicPath, file.path);
+      } else {
+        if (!isEmptyString(activeFile)) {
+          this.pauseFileAmbience(activeFile != null ? activeFile : "");
+        }
+        if (document.getElementsByClassName("obsidian-app")[0].querySelector(".vault-ambience-player") == null) {
+          if (this.plugin.settings.vault_ambience) this.plugin.playerPerGlobal.playAmbience();
+        }
+      }
+    });
+  }
+  playFileAmbience(musicPath, filePath) {
+    var _a;
+    const container = document.getElementsByClassName("obsidian-app")[0];
+    const player = document.createElement("div");
+    player.className = "file-ambience-player";
+    if (isUrl(musicPath)) {
+      if (isAllowedHost(musicPath, YT_HOSTS)) {
+        const videoId = extractId(musicPath);
+        const iframe = document.createElement("iframe");
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}`;
+        iframe.width = "300";
+        iframe.height = "166";
+        iframe.allow = "autoplay";
+        iframe.addClass(this.plugin.settings.debug_frames ? "visible" : "hidden-frame");
+        player.appendChild(iframe);
+      } else {
+        try {
+          if (isAllowedHost(musicPath, SC_HOSTS)) {
+            const embedUrl = getEmbedUrl(musicPath);
+            const iframe = document.createElement("iframe");
+            iframe.src = embedUrl;
+            iframe.width = "300";
+            iframe.height = "166";
+            iframe.allow = "autoplay";
+            iframe.addClass(this.plugin.settings.debug_frames ? "visible" : "hidden-frame");
+            player.appendChild(iframe);
+          }
+        } catch (e) {
+          console.error("Invalid URL:", musicPath, e);
+        }
+      }
+    } else {
+      const audio = document.createElement("audio");
+      audio.src = this.plugin.app.vault.adapter.getResourcePath(musicPath);
+      audio.controls = true;
+      audio.autoplay = true;
+      audio.loop = true;
+      audio.volume = ((_a = this.plugin.settings.music_volume) != null ? _a : 50) / 100;
+      player.appendChild(audio);
+      audio.addEventListener("timeupdate", () => {
+        const playbackData = this.plugin.fileAmbiencePlayers.get(filePath);
+        if (playbackData !== void 0) {
+          playbackData.position = audio.currentTime;
+        }
+      });
+    }
+    container.appendChild(player);
+    this.plugin.fileAmbiencePlayers.set(filePath, { player, position: 0 });
+  }
+  pauseFileAmbience(filePath) {
+    var _a, _b;
+    const playbackData = this.plugin.fileAmbiencePlayers.get(filePath);
+    if (playbackData === void 0) return;
+    if (isEmptyString(filePath)) throw new Error("Got empty file path, unexpected behavior.");
+    const { player } = playbackData;
+    if (player instanceof HTMLAudioElement) {
+      playbackData.position = player.currentTime;
+      player.pause();
+    } else if (player instanceof HTMLIFrameElement) {
+      if (isAllowedHost(player.src, YT_HOSTS)) {
+        (_a = player.contentWindow) == null ? void 0 : _a.postMessage(
+          JSON.stringify({ event: "command", func: "pauseVideo", args: [] }),
+          "*"
+        );
+      } else {
+        try {
+          if (isAllowedHost(player.src, SC_HOSTS)) {
+            (_b = player.contentWindow) == null ? void 0 : _b.postMessage(JSON.stringify({ method: "pause" }), "*");
+          }
+        } catch (e) {
+          console.error("Invalid URL in player.src:", player.src, e);
+        }
+      }
+    }
+    player.remove();
+    this.plugin.fileAmbiencePlayers.delete(filePath);
+  }
+  pauseVaultAmbience() {
+    this.plugin.unapply();
+  }
+};
+
+// source/player/factory/player_factory.ts
+var PlayerFactory = class {
+  constructor(_plugin) {
+    __publicField(this, "plugin");
+    this.plugin = _plugin;
+  }
+  createPlayer(player, type) {
+    switch (type) {
+      case "youtube":
+      case "yt":
+      case "ytube":
+        this.setupYouTubePlayer(player);
+        break;
+      case "sc":
+      case "scloud":
+      case "soundcloud":
+        this.setupSoundCloudPlayer(player);
+        break;
+      case "local":
+      case "audio":
+      case "fs":
+        this.setupLocalAudioPlayer(player);
+        break;
+      default:
+        throw new Error("Got an unknown type of player!");
+    }
+  }
+  setupYouTubePlayer(player) {
+    const videoId = extractId(this.plugin.settings.vault_ambience_path);
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&enablejsapi=1&playlist=${videoId}`;
+    iframe.width = "300";
+    iframe.height = "166";
+    iframe.allow = "autoplay";
+    iframe.allowFullscreen = true;
+    iframe.onload = () => {
+      var _a, _b;
+      const volume = (_a = this.plugin.settings.music_volume) != null ? _a : 50;
+      (_b = iframe.contentWindow) == null ? void 0 : _b.postMessage(
+        JSON.stringify({
+          event: "command",
+          func: "setVolume",
+          args: [volume]
+        }),
+        "*"
+      );
+    };
+    player.appendChild(iframe);
+  }
+  setupSoundCloudPlayer(player) {
+    const embedUrl = getEmbedUrl(this.plugin.settings.vault_ambience_path);
+    const apiEnabledUrl = `${embedUrl}&visual=true&show_artwork=false`;
+    const iframe = document.createElement("iframe");
+    iframe.src = apiEnabledUrl;
+    iframe.width = "300";
+    iframe.height = "166";
+    iframe.allow = "autoplay";
+    player.appendChild(iframe);
+  }
+  setupLocalAudioPlayer(player) {
+    var _a;
+    const audio = document.createElement("audio");
+    audio.src = this.plugin.app.vault.adapter.getResourcePath(this.plugin.settings.vault_ambience_path);
+    audio.controls = true;
+    audio.autoplay = true;
+    audio.loop = true;
+    audio.volume = ((_a = this.plugin.settings.music_volume) != null ? _a : 50) / 100;
+    audio.addEventListener("volumechange", () => {
+      this.plugin.settings.music_volume = audio.volume * 100;
+      this.plugin.saveData(this.plugin.settings).then().catch((error) => {
+        console.error(error);
+      });
+    });
+    player.appendChild(audio);
+  }
+};
+
+// source/player/player_per_global.ts
+var PlayerPerGlobal = class {
+  constructor(_plugin) {
+    __publicField(this, "plugin");
+    this.plugin = _plugin;
+  }
+  playAmbience() {
+    const container = document.getElementsByClassName("obsidian-app")[0];
+    let player = container.querySelector(".vault-ambience-player");
+    if (player != null) player.remove();
+    if (container.getElementsByClassName("file-ambience-player").length > 0) return;
+    player = document.createElement("div");
+    player.className = "vault-ambience-player";
+    player.addClass(this.plugin.settings.debug_frames ? "visible" : "hidden-frame");
+    const playerFactory = new PlayerFactory(this.plugin);
+    if (isUrl(this.plugin.settings.vault_ambience_path)) {
+      if (isAllowedHost(this.plugin.settings.vault_ambience_path, YT_HOSTS)) {
+        playerFactory.createPlayer(player, "yt");
+      } else if (isAllowedHost(this.plugin.settings.vault_ambience_path, SC_HOSTS)) {
+        playerFactory.createPlayer(player, "sc");
+      }
+    } else {
+      playerFactory.createPlayer(player, "local");
+    }
+    container.appendChild(player);
+    this.plugin.players.push(player);
+  }
+};
+
 // source/main.ts
-var Whisperer = class _Whisperer extends import_obsidian2.Plugin {
+var Whisperer = class _Whisperer extends import_obsidian3.Plugin {
   constructor() {
     super(...arguments);
     __publicField(this, "_settings", DEFAULT_SETTINGS);
-    __publicField(this, "_players", []);
-    __publicField(this, "_fileAmbiencePlayers", /* @__PURE__ */ new Map());
-    __publicField(this, "_activeFile", null);
+    __publicField(this, "players", []);
+    __publicField(this, "fileAmbiencePlayers", /* @__PURE__ */ new Map());
+    __publicField(this, "activeFile", null);
+    __publicField(this, "playerPerFile", new PlayerPerFile(this));
+    __publicField(this, "playerPerGlobal", new PlayerPerGlobal(this));
   }
   get settings() {
     return this._settings;
   }
-  get players() {
-    return this._players;
-  }
   onload() {
     return __async(this, null, function* () {
-      __superGet(_Whisperer.prototype, this, "onload").call(this);
+      yield __superGet(_Whisperer.prototype, this, "onload").call(this);
       yield this.loadSettings();
       this.addSettingTab(new WhispererSettingsTab(this.app, this));
-      this.registerEvent(this.app.workspace.on("file-open", this.handleFileOpen.bind(this)));
+      this.registerEvent(
+        this.app.workspace.on("file-open", (file) => __async(this, null, function* () {
+          yield this.playerPerFile.handleFileOpen(file);
+        }))
+      );
+      const container = document.getElementsByClassName("obsidian-app")[0];
+      const script = document.createElement("script");
+      script.src = "https://w.soundcloud.com/player/api.js";
+      script.id = "whisperer-md-sc-widget";
+      container.appendChild(script);
       this.apply();
     });
   }
   onunload() {
     return __async(this, null, function* () {
       __superGet(_Whisperer.prototype, this, "onunload").call(this);
+      const script = document.getElementById("whisperer-md-sc-widget");
+      if (script != null) {
+        script.src = "";
+        script.remove();
+      }
       this.unapply();
     });
   }
@@ -199,37 +578,59 @@ var Whisperer = class _Whisperer extends import_obsidian2.Plugin {
   updateVolumeSettings(settings) {
     return __async(this, null, function* () {
       if (this.players.length === 0) {
-        this.updateSettings(settings);
+        yield this.updateSettings(settings);
       } else {
         this._settings = settings;
         yield this.saveData(this.settings);
         this.players.forEach((player) => {
-          var _a, _b;
+          var _a, _b, _c;
           if (player.tagName === "IFRAME") {
             const iframe = player;
-            if (iframe.src.includes("youtube.com") || iframe.src.includes("youtu.be")) {
-              (_a = iframe.contentWindow) == null ? void 0 : _a.postMessage(
-                JSON.stringify({
-                  event: "command",
-                  func: "setVolume",
-                  args: [this.settings.music_volume]
-                }),
-                "*"
-              );
+            try {
+              if (isAllowedHost(iframe.src, YT_HOSTS)) {
+                (_a = iframe.contentWindow) == null ? void 0 : _a.postMessage(
+                  JSON.stringify({
+                    event: "command",
+                    func: "setVolume",
+                    args: [this.settings.music_volume]
+                  }),
+                  "*"
+                );
+              }
+            } catch (e) {
+              console.error("Invalid iframe src URL:", iframe.src, e);
             }
-            if (iframe.src.includes("soundcloud.com")) {
-              (_b = iframe.contentWindow) == null ? void 0 : _b.postMessage(
-                JSON.stringify({
-                  method: "setVolume",
-                  value: this.settings.music_volume / 100
-                }),
-                "*"
-              );
+            try {
+              if (isAllowedHost(iframe.src, SC_HOSTS)) {
+                (_b = iframe.contentWindow) == null ? void 0 : _b.postMessage(
+                  JSON.stringify({
+                    method: "setVolume",
+                    value: this.settings.music_volume / 100
+                  }),
+                  "https://w.soundcloud.com"
+                );
+              }
+            } catch (e) {
+              console.error("Invalid iframe src URL:", iframe.src, e);
             }
           } else if (player.tagName === "AUDIO") {
             const audio = player;
-            audio.volume = (this.settings.music_volume || 50) / 100;
+            audio.volume = ((_c = this.settings.music_volume) != null ? _c : 50) / 100;
           }
+        });
+      }
+    });
+  }
+  updateVisibleSettings(settings) {
+    return __async(this, null, function* () {
+      if (this.players.length === 0) {
+        yield this.updateSettings(settings);
+      } else {
+        this._settings = settings;
+        yield this.saveData(this.settings);
+        this.players.forEach((player) => {
+          player.removeClass(this.settings.debug_frames ? "hidden-frame" : "visible");
+          player.addClass(this.settings.debug_frames ? "visible" : "hidden-frame");
         });
       }
     });
@@ -237,188 +638,18 @@ var Whisperer = class _Whisperer extends import_obsidian2.Plugin {
   unapply() {
     this.players.forEach((player) => {
       player.remove();
+      const iframe = player.querySelector("iframe");
+      if (iframe != null) {
+        iframe.src = "";
+      }
     });
-    for (const playerData of this._fileAmbiencePlayers.values()) {
+    this.players = [];
+    for (const playerData of this.fileAmbiencePlayers.values()) {
       playerData.player.remove();
     }
   }
   apply() {
-    if (this.settings.vault_ambience) this.playAmbience();
+    if (this.settings.vault_ambience) this.playerPerGlobal.playAmbience();
   }
-  playAmbience() {
-    const container = document.getElementsByClassName("obsidian-app")[0];
-    if (!container) return;
-    let player = container.querySelector(".vault-ambience-player");
-    if (player) player.remove();
-    if (container.getElementsByClassName("file-ambience-player").length > 0) return;
-    player = document.createElement("div");
-    player.className = "vault-ambience-player";
-    if (this.isUrl(this.settings.vault_ambience_path)) {
-      if (this.settings.vault_ambience_path.includes("youtube.com") || this.settings.vault_ambience_path.includes("youtu.be")) {
-        this.setupYouTubePlayer(player);
-      } else if (this.settings.vault_ambience_path.includes("soundcloud.com")) {
-        this.setupSoundCloudPlayer(player);
-      }
-    } else {
-      this.setupLocalAudioPlayer(player);
-    }
-    container.appendChild(player);
-    this._players.push(player);
-  }
-  setupYouTubePlayer(player) {
-    const videoId = this.extractId(this.settings.vault_ambience_path);
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}`;
-    iframe.width = "300";
-    iframe.height = "166";
-    iframe.frameBorder = "0";
-    iframe.allow = "autoplay";
-    iframe.allowFullscreen = true;
-    iframe.onload = () => {
-      var _a;
-      const volume = this.settings.music_volume || 50;
-      (_a = iframe.contentWindow) == null ? void 0 : _a.postMessage(
-        JSON.stringify({
-          event: "command",
-          func: "setVolume",
-          args: [volume]
-        }),
-        "*"
-      );
-    };
-    player.appendChild(iframe);
-  }
-  setupSoundCloudPlayer(player) {
-    const embedUrl = this.getEmbedUrl(this.settings.vault_ambience_path);
-    const iframe = document.createElement("iframe");
-    iframe.src = embedUrl;
-    iframe.width = "300";
-    iframe.height = "166";
-    iframe.allow = "autoplay";
-    iframe.frameBorder = "0";
-    player.appendChild(iframe);
-  }
-  setupLocalAudioPlayer(player) {
-    const audio = document.createElement("audio");
-    audio.src = this.app.vault.adapter.getResourcePath(this.settings.vault_ambience_path);
-    audio.controls = true;
-    audio.autoplay = true;
-    audio.loop = true;
-    audio.volume = (this.settings.music_volume || 50) / 100;
-    player.appendChild(audio);
-  }
-  isUrl(str) {
-    return /^(https?:\/\/)/.test(str);
-  }
-  getEmbedUrl(url) {
-    if (url.includes("youtube.com") || url.includes("youtu.be")) {
-      const videoId = url.includes("youtu.be") ? url.split("/").pop() : new URL(url).searchParams.get("v");
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1&start=0`;
-    } else if (url.includes("soundcloud.com")) {
-      return `https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&auto_play=true`;
-    }
-    throw new Error("Unsupported URL type.");
-  }
-  extractId(url) {
-    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|.*v=))([\w-]{11})/);
-    return match ? match[1] : "";
-  }
-  //#region Working with meta files
-  handleFileOpen(file) {
-    return __async(this, null, function* () {
-      var _a;
-      if (!file) return;
-      if (!this.settings.ambience_per_files) return;
-      const fileCache = this.app.metadataCache.getFileCache(file);
-      const musicPath = (_a = fileCache == null ? void 0 : fileCache.frontmatter) == null ? void 0 : _a.music;
-      if (musicPath) {
-        this.pauseVaultAmbience();
-        if (this._activeFile) {
-          this.pauseFileAmbience(this._activeFile);
-        }
-        this._activeFile = file.path;
-        this.playFileAmbience(musicPath, file.path);
-      } else {
-        if (this._activeFile) {
-          this.pauseFileAmbience(this._activeFile);
-        }
-        if (!document.getElementsByClassName("obsidian-app")[0].querySelector(".vault-ambience-player")) {
-          if (this.settings.vault_ambience)
-            this.playAmbience();
-        }
-      }
-    });
-  }
-  playFileAmbience(musicPath, filePath) {
-    const container = document.getElementsByClassName("obsidian-app")[0];
-    if (!container) return;
-    const player = document.createElement("div");
-    player.className = "file-ambience-player";
-    if (this.isUrl(musicPath)) {
-      if (musicPath.includes("youtube.com") || musicPath.includes("youtu.be")) {
-        const videoId = this.extractId(musicPath);
-        const iframe = document.createElement("iframe");
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}`;
-        iframe.width = "300";
-        iframe.height = "166";
-        iframe.frameBorder = "0";
-        iframe.allow = "autoplay";
-        iframe.addClass("hidden-frame");
-        player.appendChild(iframe);
-      } else if (musicPath.includes("soundcloud.com")) {
-        const embedUrl = this.getEmbedUrl(musicPath);
-        const iframe = document.createElement("iframe");
-        iframe.src = embedUrl;
-        iframe.width = "300";
-        iframe.height = "166";
-        iframe.allow = "autoplay";
-        iframe.frameBorder = "0";
-        iframe.addClass("hidden-frame");
-        player.appendChild(iframe);
-      }
-    } else {
-      const audio = document.createElement("audio");
-      audio.src = this.app.vault.adapter.getResourcePath(musicPath);
-      audio.controls = true;
-      audio.autoplay = true;
-      audio.loop = true;
-      audio.volume = (this.settings.music_volume || 50) / 100;
-      player.appendChild(audio);
-      audio.addEventListener("timeupdate", () => {
-        const playbackData = this._fileAmbiencePlayers.get(filePath);
-        if (playbackData) {
-          playbackData.position = audio.currentTime;
-        }
-      });
-    }
-    container.appendChild(player);
-    this._fileAmbiencePlayers.set(filePath, { player, position: 0 });
-  }
-  pauseFileAmbience(filePath) {
-    var _a, _b;
-    const playbackData = this._fileAmbiencePlayers.get(filePath);
-    if (!playbackData) return;
-    const { player } = playbackData;
-    if (player instanceof HTMLAudioElement) {
-      playbackData.position = player.currentTime;
-      player.pause();
-    } else if (player instanceof HTMLIFrameElement) {
-      if (player.src.includes("youtube.com") || player.src.includes("youtu.be")) {
-        (_a = player.contentWindow) == null ? void 0 : _a.postMessage(
-          JSON.stringify({ event: "command", func: "pauseVideo", args: [] }),
-          "*"
-        );
-      } else if (player.src.includes("soundcloud.com")) {
-        (_b = player.contentWindow) == null ? void 0 : _b.postMessage(JSON.stringify({ method: "pause" }), "*");
-      }
-    }
-    player.remove();
-    this._fileAmbiencePlayers.delete(filePath);
-  }
-  pauseVaultAmbience() {
-    this.unapply();
-  }
-  //#endregion
 };
-
-/* nosourcemap */
+//! Volume adjustment is not directly supported by SoundCloud embedded players.

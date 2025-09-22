@@ -478853,7 +478853,6 @@ var UNITADE_SETTINGS_TAB = class extends import_obsidian2.PluginSettingTab {
       this.__updateErrors();
     }));
     mobileConfigInp.inputEl.addClass("unitade-input-style");
-    this.__uptMbConfig(mobileConfigInp, this.plugin.settings.mobile_settings.enable);
     new import_obsidian2.Setting(containerEl).setName(this.locale.getLocaleItem("SETTINGS_HARD_DELETE")[0]).setDesc(this.locale.getLocaleItem("SETTINGS_HARD_DELETE")[1]).addButton((button) => {
       button.setButtonText("Hard-delete").setIcon("upload").setWarning().onClick((event) => __async(this, null, function* () {
         if (this.plugin.settings.debug_mode)
@@ -478947,6 +478946,7 @@ var UNITADE_SETTINGS_TAB = class extends import_obsidian2.PluginSettingTab {
           is_onload_unsafe: this.plugin.settings.is_onload_unsafe ? false : this.plugin.settings.is_onload_unsafe
         });
         yield this.plugin.uptSettings(next);
+        this.display();
       }));
       return toggle;
     });
@@ -478965,6 +478965,7 @@ var UNITADE_SETTINGS_TAB = class extends import_obsidian2.PluginSettingTab {
           is_onload: this.plugin.settings.is_onload ? false : this.plugin.settings.is_onload
         });
         yield this.plugin.uptSettings(next);
+        this.display();
       }));
       return toggle;
     });
@@ -479048,11 +479049,6 @@ var UNITADE_SETTINGS_TAB = class extends import_obsidian2.PluginSettingTab {
       yield this.__updateErrors();
     }));
     ignoreMskInp.inputEl.addClass("unitade-input-style");
-    this.__uptIgnConfig(
-      [ignoreExtInp, ignoreMskInp],
-      [ignoreExtMsg, ignoreMskMsg],
-      this.plugin.settings.is_ignore
-    );
     const groupMsg = new import_obsidian2.Setting(containerEl).setName(this.locale.getLocaleItem("SETTINGS_GROUP_EXTENSIONS")[0]).setDesc(this.locale.getLocaleItem("SETTINGS_GROUP_EXTENSIONS")[1]).setTooltip(this.locale.getLocaleItem("SETTINGS_GROUP_EXTENSIONS")[2]).addToggle((toggle) => {
       toggle.setValue(this.plugin.settings.is_grouped).onChange((value) => __async(this, null, function* () {
         const next = __spreadProps(__spreadValues({}, this.plugin.settings), {
@@ -479114,7 +479110,8 @@ var UNITADE_SETTINGS_TAB = class extends import_obsidian2.PluginSettingTab {
           editorFontFamily,
           editorFontLigatures,
           forceVanillaPaste,
-          enableZoomSetting
+          enableZoomSetting,
+          titleFontSettings
         ], value);
       }));
       return toggle;
@@ -479164,7 +479161,6 @@ var UNITADE_SETTINGS_TAB = class extends import_obsidian2.PluginSettingTab {
     codeExtensionsText.innerHTML = this.locale.getLocaleItem("CODE_EDITOR_USE_DEFAULT")[3];
     codeExtensionsWarn.infoEl.appendChild(codeExtensionsText);
     editorExtensionsInput.inputEl.addClass("unitade-input-style");
-    this._uptMSConfig([editorExtensionsInput, codeExtensionsWarn], !this.plugin.settings.code_editor_settings.use_default_extensions);
     const editorFolding = new import_obsidian2.Setting(containerEl).setName(this.locale.getLocaleItem("CODE_EDITOR_FOLDING")[0]).setDesc(this.locale.getLocaleItem("CODE_EDITOR_FOLDING")[1]).addToggle((toggle) => {
       toggle.setValue(this.plugin.settings.code_editor_settings.folding).onChange((value) => __async(this, null, function* () {
         const next = __spreadProps(__spreadValues({}, this.plugin.settings), {
@@ -479271,7 +479267,7 @@ var UNITADE_SETTINGS_TAB = class extends import_obsidian2.PluginSettingTab {
     forceVanillaPasteText.addClasses(["unitade-addition-text", `unitade-attention-${getThemeObsidian()}`]);
     forceVanillaPasteText.innerHTML = this.locale.getLocaleItem("SETTINGS_FORCE_VANILLA_PASTE")[2];
     forceVanillaPaste.infoEl.appendChild(forceVanillaPasteText);
-    containerEl.createEl("h4", { text: this.locale.getLocaleItem("SETTINGS_CODE_EDITOR")[3] });
+    const titleFontSettings = containerEl.createEl("h4", { text: this.locale.getLocaleItem("SETTINGS_CODE_EDITOR")[3] });
     const editorFontSize = new import_obsidian2.Setting(containerEl).setName(this.locale.getLocaleItem("CODE_EDITOR_FONT_SIZE")[0]).addSlider((slider) => {
       slider.setValue(this.plugin.settings.code_editor_settings.font_size).setDynamicTooltip().setLimits(this.plugin.settings.SYS_FONTSIZE_MIN, this.plugin.settings.SYS_FONTSIZE_MAX, 1).onChange((value) => __async(this, null, function* () {
         const next = __spreadProps(__spreadValues({}, this.plugin.settings), {
@@ -479476,6 +479472,7 @@ var UNITADE_SETTINGS_TAB = class extends import_obsidian2.PluginSettingTab {
             current_processor: value
           })
         });
+        ``;
         yield this.plugin.uptSettings(next);
         this.__updateErrors();
       }));
@@ -479505,28 +479502,53 @@ var UNITADE_SETTINGS_TAB = class extends import_obsidian2.PluginSettingTab {
       }));
       return toggle;
     });
+    this.__uptMbConfig(mobileConfigInp, this.plugin.settings.mobile_settings.enable);
+    this.__uptIgnConfig(
+      [ignoreExtInp, ignoreMskInp],
+      [ignoreExtMsg, ignoreMskMsg],
+      this.plugin.settings.is_ignore
+    );
+    this._uptMSConfig([editorExtensionsInput, codeExtensionsWarn], !this.plugin.settings.code_editor_settings.use_default_extensions);
+    this._uptMSConfig([
+      useDefaultExtensions,
+      editorExtensionsInput,
+      codeExtensionsWarn,
+      editorTheme,
+      editorFolding,
+      editorWordWrapping,
+      editorLineNumbers2,
+      editorMinimapping,
+      editorValidationSemantic,
+      editorValidationSyntax,
+      editorFontSize,
+      editorFontFamily,
+      editorFontLigatures,
+      forceVanillaPaste,
+      enableZoomSetting,
+      titleFontSettings
+    ], this.plugin.settings.code_editor_settings.enabled);
   }
   // update mobile config
   __uptMbConfig(mbConfigInput, mbConfigEnabled) {
-    mbConfigInput.inputEl.style.display = mbConfigEnabled ? "block" : "none";
+    mbConfigInput.inputEl.style.display = mbConfigEnabled ? "flex" : "none";
   }
   // update module system config
   _uptMSConfig(configModuleElements, configModuleEnabled) {
     for (const configCodeEditorElement of configModuleElements) {
       if (configCodeEditorElement instanceof import_obsidian2.TextAreaComponent) {
-        configCodeEditorElement.inputEl.style.display = configModuleEnabled ? "block" : "none";
+        configCodeEditorElement.inputEl.style.display = configModuleEnabled ? "flex" : "none";
       } else if (configCodeEditorElement instanceof import_obsidian2.Setting) {
-        configCodeEditorElement.settingEl.style.display = configModuleEnabled ? "block" : "none";
+        configCodeEditorElement.settingEl.style.display = configModuleEnabled ? "flex" : "none";
       } else {
-        throw new Error("Unknown type of throwable entity.");
+        configCodeEditorElement.style.display = configModuleEnabled ? "flex" : "none";
       }
     }
   }
   __uptIgnConfig(ignInps, ignMsgs, ignConfigEnabled) {
-    ignInps[0].inputEl.style.display = ignConfigEnabled ? "block" : "none";
-    ignMsgs[0].settingEl.style.display = ignConfigEnabled ? "block" : "none";
-    ignInps[1].inputEl.style.display = ignConfigEnabled ? "block" : "none";
-    ignMsgs[1].settingEl.style.display = ignConfigEnabled ? "block" : "none";
+    ignInps[0].inputEl.style.display = ignConfigEnabled ? "flex" : "none";
+    ignMsgs[0].settingEl.style.display = ignConfigEnabled ? "flex" : "none";
+    ignInps[1].inputEl.style.display = ignConfigEnabled ? "flex" : "none";
+    ignMsgs[1].settingEl.style.display = ignConfigEnabled ? "flex" : "none";
   }
   __uptState(data, prev, next) {
     if (prev !== next) {
@@ -531350,11 +531372,11 @@ var UNITADE_VIEW_CODE = class _UNITADE_VIEW_CODE extends import_obsidian9.TextFi
       this.monacoEditor.setValue("");
     });
     __publicField(this, "addKeyEvents", () => {
-      window.addEventListener("keydown", this.__keyHandler, true);
+      this.containerEl.addEventListener("keydown", this.__keyHandler, true);
       if (this.plugin.settings.code_editor_settings.force_vanilla_paste)
         this.monacoEditor.addCommand(
           KeyMod2.CtrlCmd | KeyCode2.KeyV,
-          () => this.pasteFromClipboard()
+          () => this.monacoEditor.trigger("", "editor.action.clipboardPasteAction", null)
         );
     });
     __publicField(this, "addCtrlKeyWheelEvents", () => {
@@ -531365,6 +531387,7 @@ var UNITADE_VIEW_CODE = class _UNITADE_VIEW_CODE extends import_obsidian9.TextFi
         });
     });
     __publicField(this, "__keyHandler", (event) => __async(this, null, function* () {
+      if (this.getViewType() !== "codeview") return;
       const KEYMAP = /* @__PURE__ */ new Map([
         ["f", "actions.find"],
         ["h", "editor.action.startFindReplaceAction"],
@@ -531372,8 +531395,7 @@ var UNITADE_VIEW_CODE = class _UNITADE_VIEW_CODE extends import_obsidian9.TextFi
         ["Enter", "editor.action.insertLineAfter"],
         ["[", "editor.action.outdentLines"],
         ["]", "editor.action.indentLines"],
-        ["d", "editor.action.copyLinesDownAction"],
-        ["v", "editor.action.clipboardPasteAction"]
+        ["d", "editor.action.copyLinesDownAction"]
       ]);
       if (event.ctrlKey) {
         const trigger_name = KEYMAP.get(event.key);
@@ -531450,7 +531472,8 @@ var UNITADE_VIEW_CODE = class _UNITADE_VIEW_CODE extends import_obsidian9.TextFi
   }
   onUnloadFile(file) {
     return __async(this, null, function* () {
-      window.removeEventListener("keydown", this.__keyHandler, true);
+      this.containerEl.removeEventListener("keydown", this.__keyHandler, true);
+      this.containerEl.removeEventListener("wheel", this.__mousewheelHandler);
       yield __superGet(_UNITADE_VIEW_CODE.prototype, this, "onUnloadFile").call(this, file);
       yield this.__saveFontSize();
       this.monacoEditor.dispose();
@@ -531458,8 +531481,9 @@ var UNITADE_VIEW_CODE = class _UNITADE_VIEW_CODE extends import_obsidian9.TextFi
   }
   onClose() {
     return __async(this, null, function* () {
-      yield __superGet(_UNITADE_VIEW_CODE.prototype, this, "onClose").call(this);
+      this.containerEl.removeEventListener("keydown", this.__keyHandler, true);
       this.containerEl.removeEventListener("wheel", this.__mousewheelHandler);
+      yield __superGet(_UNITADE_VIEW_CODE.prototype, this, "onClose").call(this);
       yield this.__saveFontSize();
     });
   }
@@ -531477,40 +531501,6 @@ var UNITADE_VIEW_CODE = class _UNITADE_VIEW_CODE extends import_obsidian9.TextFi
   getContext(file) {
     var _a10, _b4;
     return (_b4 = file == null ? void 0 : file.path) != null ? _b4 : (_a10 = this.file) == null ? void 0 : _a10.path;
-  }
-  pasteFromClipboard() {
-    return __async(this, null, function* () {
-      try {
-        const text2 = yield navigator.clipboard.readText();
-        if (text2) {
-          const position = this.monacoEditor.getPosition();
-          const endColumn = position.column + text2.length;
-          this.monacoEditor.executeEdits("", [
-            {
-              range: new Range3(
-                position.lineNumber,
-                position.column,
-                position.lineNumber,
-                position.column
-              ),
-              text: text2
-            }
-          ]);
-          this.monacoEditor.setPosition({
-            lineNumber: position.lineNumber,
-            column: endColumn
-          });
-          this.monacoEditor.setSelection(new Selection2(
-            position.lineNumber,
-            endColumn,
-            position.lineNumber,
-            endColumn
-          ));
-        }
-      } catch (error) {
-        console.error("Clipboard paste failed:", error);
-      }
-    });
   }
 };
 
@@ -531867,6 +531857,8 @@ var UNITADE_PLUGIN = class _UNITADE_PLUGIN extends import_obsidian12.Plugin {
         }
       });
       this.app.vault.on("create", (file) => __async(this, null, function* () {
+        if (!this.app.workspace.layoutReady)
+          return;
         const filename = file.name.split(".").splice(1);
         if (isTFolder(file)) return;
         if (this.settings.is_ignore) {
@@ -532261,7 +532253,7 @@ var UNITADE_PLUGIN = class _UNITADE_PLUGIN extends import_obsidian12.Plugin {
    * @returns {void}
    */
   __apply() {
-    var _a10, _b4;
+    var _a10;
     if (this.app.viewRegistry.viewByType["codeview"] === void 0 || this.app.viewRegistry.viewByType["codeview"] === null)
       this.registerView("codeview", (leaf) => new UNITADE_VIEW_CODE(leaf, this));
     if (this.settings.is_grouped) {
@@ -532270,22 +532262,14 @@ var UNITADE_PLUGIN = class _UNITADE_PLUGIN extends import_obsidian12.Plugin {
         this.__applyCfg(data[view].join(">"), view);
       }
     }
-    if (this.is_mobile) {
-      if (!this.settings.code_editor_settings.use_default_extensions)
-        this.__applyCfg((_a10 = this.settings.mobile_settings.extensions) != null ? _a10 : this.settings.extensions, "markdown");
-    } else {
-      if (!this.settings.code_editor_settings.use_default_extensions)
-        this.__applyCfg(this.settings.extensions, "markdown");
-    }
+    if (this.settings.markdown_overcharge)
+      this.app.viewRegistry.unregisterExtensions(["md", "mdown", "markdown"]);
+    const defaultExtensions = this.is_mobile ? (_a10 = this.settings.mobile_settings.extensions) != null ? _a10 : this.settings.extensions : this.settings.extensions;
     if (this.settings.code_editor_settings.enabled) {
-      if (this.settings.code_editor_settings.use_default_extensions) {
-        if (this.is_mobile)
-          this.__applyCfg((_b4 = this.settings.mobile_settings.extensions) != null ? _b4 : this.settings.extensions, "codeview");
-        else
-          this.__applyCfg(this.settings.extensions, "codeview");
-      } else {
-        this.__applyCfg(this.settings.code_editor_settings.extensions, "codeview");
-      }
+      this.__applyCfg(this.settings.code_editor_settings.use_default_extensions ? defaultExtensions : this.settings.code_editor_settings.extensions, "codeview");
+    }
+    if (!this.settings.code_editor_settings.enabled || !this.settings.code_editor_settings.use_default_extensions) {
+      this.__applyCfg(defaultExtensions, "markdown");
     }
     const forced_extensions = this.settings.forced_extensions.split(">").map((s) => s.trim());
     for (const extension of forced_extensions) {
@@ -532363,10 +532347,18 @@ var UNITADE_PLUGIN = class _UNITADE_PLUGIN extends import_obsidian12.Plugin {
   }
   __unapply(upt_settings) {
     var _a10;
-    if (this.is_mobile) {
-      this.__unapplyCfg((_a10 = this.settings.mobile_settings.extensions) != null ? _a10 : this.settings.extensions, upt_settings.markdown_overcharge);
-    } else {
-      this.__unapplyCfg(this.settings.extensions, upt_settings.markdown_overcharge);
+    this.__unapplyCfg(upt_settings.extensions, upt_settings.markdown_overcharge);
+    this.__unapplyCfg((_a10 = upt_settings.mobile_settings.extensions) != null ? _a10 : "", upt_settings.markdown_overcharge);
+    this.__unapplyCfg(upt_settings.code_editor_settings.extensions, upt_settings.markdown_overcharge);
+    if (this.app.viewRegistry.viewByType["codeview"] !== void 0 && this.app.viewRegistry.viewByType["codeview"] !== null)
+      this.app.viewRegistry.unregisterView("codeview");
+    if (this.app.viewRegistry.viewByType["mirrorview"] !== void 0 && this.app.viewRegistry.viewByType["mirrorview"] !== null)
+      this.app.viewRegistry.unregisterView("mirrorview");
+    if (upt_settings.is_grouped) {
+      const data = parsegroup(upt_settings.grouped_extensions);
+      for (const view in data) {
+        this.__unapplyCfg(data[view].join(">"), upt_settings.markdown_overcharge);
+      }
     }
   }
   unapply() {
@@ -532379,8 +532371,10 @@ var UNITADE_PLUGIN = class _UNITADE_PLUGIN extends import_obsidian12.Plugin {
   }
   __unapplyCfg(extensions, markdown_charge) {
     const ext_arr = extensions.split(">").map((s) => s.trim());
+    if (markdown_charge)
+      this.app.viewRegistry.registerExtensions(["md", "mdown", "markdown"], "markdown");
     for (const extension of ext_arr)
-      if (markdown_charge || extension !== "md") {
+      if (extension !== "md") {
         if (!this._settings.errors[extension]) {
           try {
             this.app.viewRegistry.unregisterExtensions([extension]);
@@ -533829,3 +533823,5 @@ monaco-editor/esm/vs/language/json/monaco.contribution.js:
    * https://github.com/microsoft/monaco-editor/blob/main/LICENSE.txt
    *-----------------------------------------------------------------------------*)
 */
+
+/* nosourcemap */

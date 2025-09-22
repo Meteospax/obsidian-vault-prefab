@@ -1,1 +1,11 @@
-{}
+{
+  "editing-toolbar:toggle-format-brush": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "F"
+    }
+  ]
+}
