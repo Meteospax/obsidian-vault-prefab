@@ -1,0 +1,10 @@
+{
+  "vault_ambience": false,
+  "vault_ambience_path": "",
+  "ambience_per_files": true,
+  "music_volume": 50,
+  "debug_frames": false,
+  "MIN_VOLUME": 0,
+  "MAX_VOLUME": 100,
+  "VOLUME_STEP": 1
+}

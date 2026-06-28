@@ -1,0 +1,18 @@
+{
+  "accentColor": "",
+  "cssTheme": "Centurion (Default)",
+  "translucency": false,
+  "baseFontSize": 16,
+  "textFontFamily": "Merriweather",
+  "baseFontSizeAction": false,
+  "theme": "system",
+  "enabledCssSnippets": [
+    "timelines",
+    "tables",
+    "plugins",
+    "justify",
+    "indents",
+    "images"
+  ],
+  "showViewHeader": true
+}
