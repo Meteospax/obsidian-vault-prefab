@@ -1,8 +1,0 @@
-/* Remove vertical indentation guides */
-.cm-indent::before {
-    display: none !important;
-}
-
-.cm-widgetBuffer {
-    display: none !important;
-}
