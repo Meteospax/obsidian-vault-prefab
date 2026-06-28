@@ -1,0 +1,30 @@
+{
+  "showRibbon": false,
+  "pdfExportSettings": {
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "spellcheck": true,
+  "vimMode": false,
+  "autoConvertHtml": false,
+  "trashOption": "local",
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "current",
+  "useMarkdownLinks": false,
+  "showUnsupportedFiles": true,
+  "strictLineBreaks": false,
+  "readableLineLength": true,
+  "rightToLeft": false,
+  "foldHeading": true,
+  "propertiesInDocument": "hidden",
+  "userIgnoreFilters": [
+    "#hidden"
+  ],
+  "showIndentGuide": true,
+  "showInlineTitle": true,
+  "uriCallbacks": true,
+  "showLineNumber": false,
+  "promptDelete": false
+}

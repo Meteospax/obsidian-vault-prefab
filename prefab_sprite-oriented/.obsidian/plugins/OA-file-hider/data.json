@@ -1,0 +1,14 @@
+{
+  "hidden": true,
+  "hiddenList": [
+    "src",
+    "LICENSE.md",
+    "LICENSE",
+    "Spaces",
+    "icons",
+    "icons-meta",
+    "resources",
+    "resources-meta",
+    "README.md"
+  ]
+}

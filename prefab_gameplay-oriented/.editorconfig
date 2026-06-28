@@ -1,0 +1,25 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{md}]
+charset = utf-8
+
+# Trailing whitespace not allowed
+[*.{md}]
+trim_trailing_whitespace = true
+
+# Only remove trailing whitespace from changed lines
+[*.{md}]
+diff_trimmed_whitespace = true
+
+# Obsidian writes files in single lines, so we don't need
+# to explicitly set the line length limit
